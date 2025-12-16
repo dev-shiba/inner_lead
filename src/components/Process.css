@@ -1,0 +1,367 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Process Section - 5-Step Timeline
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.process-section {
+    padding: var(--space-32) 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+
+.process-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.process-gradient {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    background: radial-gradient(ellipse 50% 100% at 50% 100%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+    bottom: 0;
+}
+
+.process-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.process-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.process-badge {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Timeline
+   ───────────────────────────────────────────────────────────────────────────── */
+.process-timeline {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 40px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: var(--glass-border);
+}
+
+.timeline-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: lineGrow 2s ease-out 1s forwards;
+}
+
+@keyframes lineGrow {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.process-step {
+    flex: 1;
+    text-align: center;
+    padding: 0 var(--space-2);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: var(--delay);
+}
+
+.process-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--glass-border);
+    border-radius: 50%;
+    position: relative;
+    transition: all var(--transition-base);
+}
+
+.process-step:hover .step-icon {
+    border-color: var(--accent-purple);
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+}
+
+.step-number {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--accent-purple);
+    margin-bottom: var(--space-2);
+}
+
+.step-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.step-description {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Timeline End Arrow */
+.timeline-end-arrow {
+    position: absolute;
+    right: 9%;
+    top: 29px;
+    color: var(--accent-cyan);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease-out 1.2s;
+    /* Delay to appear after line grows */
+    z-index: 2;
+    filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.5));
+}
+
+.timeline-end-arrow.visible {
+    opacity: 1;
+    transform: translateX(0);
+    animation: arrowPulseHorizontal 2s infinite 2s;
+}
+
+@keyframes arrowPulseHorizontal {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(6px);
+
+        /* ─────────────────────────────────────────────────────────────────────────────
+   Responsive
+   ───────────────────────────────────────────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .process-timeline {
+                flex-wrap: wrap;
+                gap: var(--space-8);
+                justify-content: center;
+            }
+
+            .timeline-line {
+                display: none;
+            }
+
+            .process-step {
+                flex: 0 0 calc(33.333% - var(--space-6));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-section {
+                padding: var(--space-20) 0;
+            }
+
+            .process-timeline {
+                flex-direction: column;
+                gap: 0;
+                padding-left: var(--space-6);
+                position: relative;
+            }
+
+            /* Vertical Timeline Line */
+            .timeline-line {
+                display: block;
+                position: absolute;
+                top: 28px;
+                bottom: 48px;
+                /* Ends at center of last icon */
+                left: 53px;
+                /* Precise center alignment */
+                width: 2px;
+                height: auto;
+                background: var(--glass-border);
+            }
+
+            .timeline-line::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: linear-gradient(180deg, var(--accent-purple) 0%, var(--accent-cyan) 100%);
+                animation: none;
+                transform: none;
+            }
+
+            .process-header.visible~.process-timeline .timeline-line::after {
+                animation: verticalLineGrow 2.5s ease-out 0.5s forwards;
+            }
+
+            @keyframes verticalLineGrow {
+                0% {
+                    height: 0;
+                }
+
+                100% {
+                    height: 100%;
+                }
+            }
+
+            .process-step {
+                flex: 0 0 100%;
+                display: flex;
+                align-items: flex-start;
+                gap: var(--space-5);
+                text-align: left;
+                padding: var(--space-5) 0;
+                position: relative;
+            }
+
+            .step-icon {
+                width: 56px;
+                height: 56px;
+                min-width: 56px;
+                margin: 0;
+                font-size: 1.5rem;
+                position: relative;
+                z-index: 2;
+                background: var(--bg-secondary);
+                border-width: 3px;
+            }
+
+            /* Glowing pulse effect when visible */
+            .process-step.visible .step-icon {
+                animation: iconPulse 0.6s ease-out forwards;
+                animation-delay: var(--delay);
+            }
+
+            @keyframes iconPulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+                    border-color: var(--glass-border);
+                }
+
+                50% {
+                    box-shadow: 0 0 20px 8px rgba(139, 92, 246, 0.3);
+                    border-color: var(--accent-purple);
+                }
+
+                100% {
+                    box-shadow: 0 0 15px 4px rgba(139, 92, 246, 0.15);
+                    border-color: var(--accent-purple);
+                }
+            }
+
+            .process-step .step-content {
+                flex: 1;
+                padding-top: var(--space-2);
+            }
+
+            .step-number {
+                font-size: var(--text-xs);
+                margin-bottom: var(--space-1);
+            }
+
+            .step-title {
+                font-size: var(--text-base);
+                margin-bottom: var(--space-1);
+            }
+
+            .step-description {
+                font-size: var(--text-sm);
+                color: var(--text-secondary);
+                line-height: 1.6;
+            }
+
+            /* Staggered slide-in animation */
+            .process-step {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            .process-step.visible {
+                opacity: 1;
+                transform: translateX(0);
+                animation: slideInFromLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                animation-delay: var(--delay);
+            }
+
+            @keyframes slideInFromLeft {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            /* Connector dots between steps */
+            .process-step::before {
+                content: '';
+                position: absolute;
+                left: 27px;
+                top: calc(var(--space-5) + 56px + var(--space-2));
+                bottom: calc(-1 * var(--space-5) - var(--space-2));
+                width: 0;
+                opacity: 0;
+            }
+
+            .process-step:last-child::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .process-timeline {
+                padding-left: var(--space-4);
+            }
+
+            .timeline-line {
+                left: 41px;
+                bottom: 40px;
+            }
+
+            .step-icon {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+                font-size: 1.25rem;
+            }
+        }
