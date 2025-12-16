@@ -38,7 +38,7 @@ export default function Hero() {
 
             <div className="hero-content container">
                 <div className="hero-badge animate-fade-in">
-                    <img src="/src/assets/images/hero-icon.png" alt="" className="badge-icon-img" />
+                    <img src="/assets/images/hero-icon.png" alt="" className="badge-icon-img" />
                     <span>2025 생성형 AI 교육의 새로운 기준</span>
                 </div>
 
@@ -57,7 +57,7 @@ export default function Hero() {
                 {/* Profile Image */}
                 <div className="hero-profile">
                     <img
-                        src="/src/assets/innerlead_profile.png"
+                        src="/assets/innerlead_profile.png"
                         alt="이너리드 프로필"
                         className="profile-image"
                     />
