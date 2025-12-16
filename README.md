@@ -138,6 +138,4 @@ This project is licensed under the MIT License.
 
 **Made with 💜 by Inner Lead**
 
-[🌐 Website](https://innerlead.co.kr) · [📧 Contact](mailto:contact@innerlead.co.kr)
-
 </div>
