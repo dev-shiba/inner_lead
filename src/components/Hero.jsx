@@ -78,7 +78,7 @@ export default function Hero() {
                     </div>
                     <div className="stat-divider"></div>
                     <div className="stat-item">
-                        <span className="stat-number stat-shimmer">500+</span>
+                        <span className="stat-number stat-shimmer">28,000+</span>
                         <span className="stat-label">수강생</span>
                     </div>
                     <div className="stat-divider"></div>

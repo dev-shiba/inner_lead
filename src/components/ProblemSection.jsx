@@ -31,7 +31,10 @@ export default function ProblemSection() {
     return (
         <section className="problem-section" ref={ref}>
             <div className="problem-bg">
-                <div className="problem-gradient"></div>
+                <div className="problem-bg-obj-wrapper">
+                    <img src="/assets/images/animated-sec-bg.png" alt="" className="problem-bg-obj" />
+                </div>
+                <div className="problem-overlay"></div>
             </div>
 
             <div className="container">

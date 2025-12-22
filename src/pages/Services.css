@@ -1,0 +1,369 @@
+/* Services Page Styles */
+.services-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* Hero Section */
+.services-hero {
+    position: relative;
+    padding: 140px 0 60px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.services-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.services-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+.services-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+}
+
+.services-glow-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--accent-primary);
+    top: -100px;
+    right: 10%;
+}
+
+.services-glow-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--accent-secondary);
+    bottom: -50px;
+    left: 10%;
+}
+
+.services-hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.services-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    margin-bottom: 24px;
+}
+
+.services-title {
+    font-size: var(--text-4xl);
+    /* Match Portfolio page */
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.services-title span {
+    display: inline;
+}
+
+.services-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* Services SaaS Card Grid */
+.services-grid-section {
+    padding: 40px 0 100px;
+}
+
+.services-card-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: stretch;
+    /* Cards same height */
+}
+
+.service-saas-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 380px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-saas-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-primary);
+}
+
+.service-saas-card.popular {
+    border-color: var(--accent-primary);
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+    z-index: 2;
+    transform: scale(1.02);
+    /* Slightly larger */
+}
+
+.service-saas-card.popular:hover {
+    transform: scale(1.02) translateY(-10px);
+    box-shadow: 0 25px 50px rgba(139, 92, 246, 0.25);
+}
+
+.popular-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Image */
+.card-image-wrapper {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.service-saas-card:hover .card-image {
+    transform: scale(1.1);
+}
+
+.card-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.6));
+}
+
+/* Card Content */
+.card-content {
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.card-subtitle {
+    font-size: 0.95rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.card-description {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.card-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.card-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    flex-grow: 1;
+    /* Push CTA to bottom */
+}
+
+.card-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.check-icon {
+    color: var(--accent-primary);
+    font-weight: 800;
+}
+
+/* Card CTA Button */
+.card-cta {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.card-cta.primary {
+    background: var(--accent-primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-cta.primary:hover {
+    background: var(--accent-secondary);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
+    transform: translateY(-2px);
+}
+
+.card-cta.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-cta.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+    color: white;
+}
+
+
+
+
+
+
+/* CTA Section */
+.services-cta-section {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.services-cta-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.services-cta-section p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+    color: white;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .services-hero {
+        padding: 120px 0 40px;
+    }
+
+    .services-card-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-saas-card {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .service-saas-card.popular {
+        transform: none;
+    }
+
+    .service-saas-card.popular:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-image-wrapper {
+        height: 180px;
+    }
+
+    .ebook-pkg-card {
+        width: 100%;
+    }
+}

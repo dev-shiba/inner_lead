@@ -8,13 +8,13 @@ export default function Contact() {
         {
             name: '카카오톡 채널',
             icon: '💬',
-            url: 'https://pf.kakao.com/_xxxxx',
+            url: 'http://pf.kakao.com/_mHxldG',
             color: '#FEE500',
         },
         {
             name: '네이버 블로그',
             icon: '📝',
-            url: 'https://blog.naver.com/innerlead',
+            url: 'https://blog.naver.com/aibro',
             color: '#03C75A',
         },
         {
@@ -52,7 +52,7 @@ export default function Contact() {
                         </p>
 
                         <div className="contact-cta-group">
-                            <a href="https://open.kakao.com" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+                            <a href="https://open.kakao.com/o/simoMRPf" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M12 3c5.5 0 10 3.58 10 8s-4.5 8-10 8c-.59 0-1.17-.05-1.73-.13L5.59 21.75A.75.75 0 0 1 4.5 21.13v-4.46C2.46 15.06 2 13.14 2 11c0-4.42 4.5-8 10-8z" />
                                 </svg>

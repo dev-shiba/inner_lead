@@ -22,6 +22,7 @@ export default function Navbar() {
     const navLinks = [
         { to: '/', label: '홈' },
         { to: '/portfolio', label: '포트폴리오' },
+        { to: '/services', label: '서비스 소개' },
     ];
 
     return (

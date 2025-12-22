@@ -6,7 +6,7 @@ export default function AnimatedSection() {
     const [ref, isVisible] = useScrollAnimation(0.3);
 
     const yearsExp = useCountUp(17, 2000, isVisible);
-    const students = useCountUp(500, 2500, isVisible);
+    const students = useCountUp(28000, 2500, isVisible);
     const satisfaction = useCountUp(98, 2000, isVisible);
     const companies = useCountUp(50, 2000, isVisible);
 
@@ -14,7 +14,7 @@ export default function AnimatedSection() {
         { value: yearsExp, suffix: '+', label: '년', subLabel: '실무 경력', icon: '⚡' },
         { value: students, suffix: '+', label: '명', subLabel: '수강생', icon: '👥' },
         { value: satisfaction, suffix: '%', label: '', subLabel: '만족도', icon: '⭐' },
-        { value: companies, suffix: '+', label: '개', subLabel: '기업 교육', icon: '🏢' },
+        { value: companies, suffix: '+', label: '개', subLabel: 'DB그룹', icon: '🏢' },
     ];
 
     return (
@@ -55,7 +55,7 @@ export default function AnimatedSection() {
                             <div className="stat-card-bg"></div>
                             <span className="stat-icon">{stat.icon}</span>
                             <div className="stat-value">
-                                <span className="stat-number">{stat.value}</span>
+                                <span className="stat-number">{typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}</span>
                                 <span className="stat-suffix">{stat.suffix}</span>
                                 <span className="stat-unit">{stat.label}</span>
                             </div>

@@ -68,7 +68,7 @@
 }
 
 .contact-title {
-    font-size: var(--text-5xl);
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 900;
     line-height: 1.2;
     margin-bottom: var(--space-6);
@@ -81,74 +81,133 @@
     margin-bottom: var(--space-8);
 }
 
+/* Main CTA Buttons */
 .contact-cta-group {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    margin-top: var(--space-4);
 }
 
 .btn-lg {
-    padding: var(--space-5) var(--space-10);
-    font-size: var(--text-lg);
+    padding: 20px 32px;
+    font-size: 1.1rem;
+    border-radius: 16px;
+    letter-spacing: -0.02em;
+}
+
+.btn-primary.btn-lg {
+    background: linear-gradient(135deg, #FEE500, #FDBD00);
+    color: #191919;
+    font-weight: 800;
+    box-shadow: 0 10px 20px rgba(254, 229, 0, 0.2);
+    border: none;
+}
+
+.btn-primary.btn-lg:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(254, 229, 0, 0.3);
+    background: linear-gradient(135deg, #FFEB3B, #FFC107);
+}
+
+.btn-secondary.btn-lg {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-weight: 700;
+}
+
+.btn-secondary.btn-lg:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Channels
    ───────────────────────────────────────────────────────────────────────────── */
 .contact-channels {
-    padding: var(--space-8);
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-2xl);
+    padding: 40px;
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    backdrop-filter: blur(20px);
 }
 
 .channels-title {
-    font-size: var(--text-lg);
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: var(--space-6);
+    margin-bottom: 24px;
     text-align: center;
+    color: #a78bfa;
 }
 
 .channels-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-3);
+    gap: 16px;
 }
 
 .channel-card {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4);
-    background: var(--bg-tertiary);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+    gap: 12px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.channel-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--channel-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
 }
 
 .channel-card:hover {
-    border-color: var(--channel-color);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.channel-card:hover::before {
+    opacity: 0.15;
 }
 
 .channel-icon {
     font-size: 1.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .channel-name {
     flex: 1;
-    font-size: var(--text-sm);
+    font-size: 0.95rem;
     font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 1;
 }
 
 .channel-card svg {
-    color: var(--text-tertiary);
-    transition: color var(--transition-base);
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .channel-card:hover svg {
     color: var(--channel-color);
+    transform: translateX(3px);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────

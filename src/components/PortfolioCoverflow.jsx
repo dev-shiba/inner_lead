@@ -57,6 +57,15 @@ export default function PortfolioCoverflow() {
             image: '/assets/portfolio/cheongju.png',
             gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
         },
+        {
+            id: 'db-group',
+            category: '기업교육',
+            title: 'DB인재개발원 AX교육',
+            description: 'DB손해보험, DB생명, DB하이텍 등 DB그룹 계열사 실무진 대상 AI 활용 교육',
+            result: '만족도 평균 이상',
+            image: '/assets/images/db.png',
+            gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        },
     ];
 
     const handlePrev = () => {
@@ -104,11 +113,12 @@ export default function PortfolioCoverflow() {
         const diff = index - activeIndex;
         const absD = Math.abs(diff);
 
-        if (absD > 3) {
+        if (absD > 2) {
             return {
                 transform: `translateX(${diff * 100}px) scale(0.5) rotateY(${diff > 0 ? -60 : 60}deg)`,
                 opacity: 0,
                 zIndex: 0,
+                display: 'none', // 아예 공간 차지 안 하게
             };
         }
 

@@ -1,36 +1,77 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   Problem Section - 문제 제기 (빡센 메시지)
-   ═══════════════════════════════════════════════════════════════════════════ */
-
+/* Problem Section - Pain Point */
 .problem-section {
     position: relative;
-    padding: var(--space-24) 0;
+    padding: 120px 0;
+    /* User request: Solid black background */
+    background-color: #000000;
     overflow: hidden;
+    color: white;
 }
 
+/* Background */
 .problem-bg {
     position: absolute;
     inset: 0;
     z-index: 0;
+    overflow: hidden;
+}
+
+.problem-bg-obj-wrapper {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.problem-bg-obj {
+    width: 70%;
+    /* 30% reduced from full width */
+    max-width: 800px;
+    opacity: 0.6;
+    /* User request: Remove shadow effects */
+    filter: none;
+    animation: floatingProblem 8s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+@keyframes floatingProblem {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-15px) scale(1.02);
+    }
+}
+
+.problem-overlay {
+    position: absolute;
+    inset: 0;
+    /* Slight fade to make text readable over image */
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
 }
 
 .problem-gradient {
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(220, 38, 38, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(220, 38, 38, 0.04) 0%, transparent 50%);
+    /* Removed as we are using image now */
+    display: none;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Header
-   ───────────────────────────────────────────────────────────────────────────── */
+/* Content */
+.container {
+    position: relative;
+    z-index: 1;
+}
+
 .problem-header {
     text-align: center;
-    margin-bottom: var(--space-16);
+    margin-bottom: 80px;
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
 .problem-header.visible {
@@ -40,56 +81,53 @@
 
 .problem-badge {
     display: inline-block;
-    padding: var(--space-1) var(--space-3);
-    background: rgba(220, 38, 38, 0.08);
-    border: 1px solid rgba(220, 38, 38, 0.2);
-    border-radius: var(--radius-full);
-    font-size: var(--text-xs);
-    font-weight: 500;
-    color: #f87171;
-    margin-bottom: var(--space-4);
+    padding: 6px 16px;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: #ef4444;
+    margin-bottom: 24px;
+    font-weight: 600;
 }
 
 .problem-title {
-    font-size: var(--text-3xl);
-    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
     line-height: 1.3;
-    margin-bottom: var(--space-3);
+    margin-bottom: 24px;
 }
 
 .danger-text {
-    background: linear-gradient(135deg, #f87171 0%, #fca5a5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ef4444;
 }
 
 .problem-subtitle {
-    font-size: var(--text-sm);
-    color: var(--text-tertiary);
+    font-size: 1.1rem;
+    color: #9ca3af;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Problem Cards Grid
-   ───────────────────────────────────────────────────────────────────────────── */
+/* Problem Grid */
 .problem-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-4);
-    margin-bottom: var(--space-10);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
 }
 
 .problem-card {
     position: relative;
-    padding: var(--space-6);
-    background: rgba(220, 38, 38, 0.02);
-    border: 1px solid rgba(220, 38, 38, 0.08);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+    background: rgba(10, 10, 10, 0.85);
+    /* Much less transparent */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px 30px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: var(--delay);
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: var(--delay);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .problem-card.visible {
@@ -98,20 +136,20 @@
 }
 
 .problem-card:hover {
-    border-color: rgba(220, 38, 38, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(220, 38, 38, 0.08);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(239, 68, 68, 0.3);
+    transform: translateY(-5px);
 }
 
 .problem-card-glow {
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.1), transparent 70%);
     opacity: 0;
-    transition: opacity var(--transition-base);
+    transition: opacity 0.5s ease;
 }
 
 .problem-card:hover .problem-card-glow {
@@ -119,56 +157,50 @@
 }
 
 .problem-icon {
-    font-size: 2rem;
-    margin-bottom: var(--space-3);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
 
 .problem-card-title {
-    font-size: var(--text-lg);
+    font-size: 1.3rem;
     font-weight: 700;
-    color: #f87171;
-    margin-bottom: var(--space-2);
+    margin-bottom: 16px;
+    color: #ef4444;
 }
 
 .problem-card-desc {
-    font-size: var(--text-sm);
-    color: var(--text-tertiary);
+    font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: var(--space-4);
+    color: #9ca3af;
+    margin-bottom: 30px;
+    min-height: 80px;
 }
 
 .problem-stat {
     display: flex;
-    align-items: baseline;
-    gap: var(--space-2);
-    padding-top: var(--space-4);
-    border-top: 1px solid rgba(239, 68, 68, 0.15);
+    align-items: center;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .problem-stat-number {
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 700;
-    background: linear-gradient(135deg, #f87171 0%, #fca5a5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fca5a5;
 }
 
 .problem-stat-label {
-    font-size: var(--text-sm);
-    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    color: #d1d5db;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   CTA
-   ───────────────────────────────────────────────────────────────────────────── */
+/* CTA */
 .problem-cta {
     text-align: center;
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: 600ms;
+    transform: translateY(20px);
+    transition: all 0.5s ease 0.6s;
 }
 
 .problem-cta.visible {
@@ -177,27 +209,40 @@
 }
 
 .problem-cta-text {
-    font-size: var(--text-base);
-    color: var(--text-tertiary);
+    font-size: 1.1rem;
+    color: #9ca3af;
 }
 
 .problem-cta-text strong {
-    color: #fb923c;
+    color: #ef4444;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Responsive
-   ───────────────────────────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-    .problem-section {
-        padding: var(--space-20) 0;
+/* Responsive */
+@media (max-width: 1024px) {
+    .problem-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .problem-title {
-        font-size: var(--text-4xl);
+    .problem-card:last-child {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .problem-section {
+        padding: 80px 0;
     }
 
     .problem-grid {
         grid-template-columns: 1fr;
+    }
+
+    .problem-card:last-child {
+        grid-column: auto;
+    }
+
+    .problem-bg-obj {
+        width: 90%;
+        opacity: 0.4;
     }
 }

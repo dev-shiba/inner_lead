@@ -16,6 +16,7 @@
     position: absolute;
     inset: 0;
     z-index: 0;
+    overflow: hidden;
 }
 
 .animated-grid-3d {
@@ -30,28 +31,35 @@
     mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
 }
 
-.animated-orb {
+.animated-bg-obj-wrapper {
     position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    animation: float 10s ease-in-out infinite;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
 }
 
-.animated-orb-1 {
-    width: 300px;
-    height: 300px;
-    background: rgba(139, 92, 246, 0.1);
-    top: 20%;
-    left: 10%;
+.animated-bg-obj {
+    width: 70%;
+    /* 30% reduced from full width */
+    max-width: 800px;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 50px rgba(139, 92, 246, 0.3));
+    animation: floatingObj 6s ease-in-out infinite;
+    transform-origin: center center;
 }
 
-.animated-orb-2 {
-    width: 250px;
-    height: 250px;
-    background: rgba(99, 102, 241, 0.08);
-    bottom: 10%;
-    right: 10%;
-    animation-delay: 3s;
+@keyframes floatingObj {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.02);
+    }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -73,8 +81,8 @@
 }
 
 .animated-title {
-    font-size: var(--text-3xl);
-    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
     margin-bottom: var(--space-2);
     display: flex;
     flex-wrap: wrap;
@@ -270,5 +278,10 @@
 
     .stat-number {
         font-size: var(--text-4xl);
+    }
+
+    .animated-bg-obj {
+        width: 90%;
+        opacity: 0.6;
     }
 }
