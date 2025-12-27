@@ -699,9 +699,4 @@
         flex-direction: column;
         gap: var(--space-4);
     }
-
-    .stat-divider {
-        width: 60px;
-        height: 1px;
-    }
 }
