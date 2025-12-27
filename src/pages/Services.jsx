@@ -33,8 +33,8 @@ export default function Services() {
                 '누적 60건 리뷰, 평점 5.0'
             ],
             cta: '구매하기',
+            ctaVariant: 'orange',
             link: 'https://kmong.com/gig/628331',
-            // Highlight effect removed per user request
         },
         {
             id: 'content',
@@ -109,7 +109,7 @@ export default function Services() {
                                         ))}
                                     </ul>
 
-                                    <a href={service.link} target="_blank" rel="noopener noreferrer" className="card-cta primary">
+                                    <a href={service.link} target="_blank" rel="noopener noreferrer" className={`card-cta primary ${service.ctaVariant || ''}`}>
                                         {service.cta}
                                     </a>
                                 </div>
