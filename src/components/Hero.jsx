@@ -1,10 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import './Hero.css';
 
 export default function Hero() {
     const [displayText, setDisplayText] = useState('');
     const [showCursor, setShowCursor] = useState(true);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const heroRef = useRef(null);
     const fullText = 'AI로 리드하는 당신의 미래';
+
+    // 별 파티클 생성
+    const stars = useMemo(() => {
+        return Array.from({ length: 50 }, (_, i) => ({
+            id: i,
+            x: Math.random() * 100,
+            y: Math.random() * 100,
+            size: Math.random() * 3 + 1,
+            delay: Math.random() * 3,
+            duration: Math.random() * 2 + 2,
+        }));
+    }, []);
 
     useEffect(() => {
         let currentIndex = 0;
@@ -27,13 +41,52 @@ export default function Hero() {
         return () => clearInterval(cursorInterval);
     }, []);
 
+    // 마우스 움직임 추적
+    const handleMouseMove = (e) => {
+        if (!heroRef.current) return;
+        const rect = heroRef.current.getBoundingClientRect();
+        setMousePos({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+        });
+    };
+
     return (
-        <section className="hero">
+        <section className="hero" ref={heroRef} onMouseMove={handleMouseMove}>
             {/* Background */}
             <div className="hero-bg">
                 <div className="hero-grid"></div>
                 <div className="hero-glow hero-glow-1"></div>
                 <div className="hero-glow hero-glow-2"></div>
+
+                {/* Star Particles */}
+                <div className="hero-stars">
+                    {stars.map((star) => {
+                        const dx = mousePos.x - (star.x / 100) * (heroRef.current?.offsetWidth || 0);
+                        const dy = mousePos.y - (star.y / 100) * (heroRef.current?.offsetHeight || 0);
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        const maxDistance = 150;
+                        const scale = distance < maxDistance ? 1 + (1 - distance / maxDistance) * 1.5 : 1;
+                        const brightness = distance < maxDistance ? 1 + (1 - distance / maxDistance) : 1;
+
+                        return (
+                            <div
+                                key={star.id}
+                                className="star"
+                                style={{
+                                    left: `${star.x}%`,
+                                    top: `${star.y}%`,
+                                    width: `${star.size}px`,
+                                    height: `${star.size}px`,
+                                    '--delay': `${star.delay}s`,
+                                    '--duration': `${star.duration}s`,
+                                    transform: `scale(${scale})`,
+                                    opacity: 0.3 * brightness,
+                                }}
+                            />
+                        );
+                    })}
+                </div>
             </div>
 
             <div className="hero-content container">
