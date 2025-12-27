@@ -38,7 +38,7 @@
 
 .contact-content {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr auto;
     gap: var(--space-16);
     align-items: start;
     position: relative;
@@ -129,6 +129,8 @@
    Channels
    ───────────────────────────────────────────────────────────────────────────── */
 .contact-channels {
+    width: 500px;
+    flex-shrink: 0;
     padding: 40px;
     background: rgba(20, 20, 20, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -198,6 +200,7 @@
     color: rgba(255, 255, 255, 0.9);
     position: relative;
     z-index: 1;
+    white-space: nowrap;
 }
 
 .channel-card svg {
@@ -253,6 +256,10 @@
     .contact-content {
         grid-template-columns: 1fr;
         gap: var(--space-10);
+    }
+
+    .contact-channels {
+        width: 100%;
     }
 }
 
