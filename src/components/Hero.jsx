@@ -183,7 +183,8 @@ export default function Hero() {
                             src="/assets/innerlead_profile_v2.png"
                             alt="이너리드 프로필"
                             className="profile-image"
-                            loading="lazy"
+                            loading="eager"
+                            fetchPriority="high"
                         />
                     </div>
                 </div>
