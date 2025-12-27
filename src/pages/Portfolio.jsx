@@ -1,39 +1,18 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { useCoverflowDrag } from '../hooks/useCoverflowDrag';
 import { portfolioItems } from '../data/portfolioData';
+import PortfolioSwiper from '../components/PortfolioSwiper';
 import './Portfolio.css';
 
 export default function Portfolio() {
     const [ref, isVisible] = useScrollAnimation(0.1);
     const [viewMode, setViewMode] = useState('coverflow');
-    const containerRef = useRef(null);
+    const [activeIndex, setActiveIndex] = useState(2);
 
-    const {
-        activeIndex,
-        setActiveIndex,
-        handlePrev,
-        handleNext,
-        getCardStyle,
-        dragHandlers,
-    } = useCoverflowDrag(portfolioItems.length, { enableKeyboard: false });
-
-    // Keyboard handling with viewMode check
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            if (viewMode === 'coverflow') {
-                if (e.key === 'ArrowLeft') handlePrev();
-                if (e.key === 'ArrowRight') handleNext();
-            }
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [viewMode, handlePrev, handleNext]);
-
-    // Wrap drag handlers to check viewMode
-    const coverflowDragHandlers = viewMode === 'coverflow' ? dragHandlers : {};
+    const handleSlideChange = (swiper) => {
+        setActiveIndex(swiper.activeIndex);
+    };
 
     return (
         <main className="portfolio-page">
@@ -53,7 +32,14 @@ export default function Portfolio() {
                             className={`toggle-btn ${viewMode === 'coverflow' ? 'active' : ''}`}
                             onClick={() => setViewMode('coverflow')}
                         >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
                                 <rect x="2" y="6" width="6" height="12" rx="1" />
                                 <rect x="9" y="4" width="6" height="16" rx="1" />
                                 <rect x="16" y="6" width="6" height="12" rx="1" />
@@ -64,7 +50,14 @@ export default function Portfolio() {
                             className={`toggle-btn ${viewMode === 'grid' ? 'active' : ''}`}
                             onClick={() => setViewMode('grid')}
                         >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
                                 <rect x="3" y="3" width="7" height="7" />
                                 <rect x="14" y="3" width="7" height="7" />
                                 <rect x="3" y="14" width="7" height="7" />
@@ -79,73 +72,19 @@ export default function Portfolio() {
             {/* Cover Flow View */}
             {viewMode === 'coverflow' && (
                 <section className="coverflow-section">
-                    <div
-                        className="coverflow-container"
-                        ref={containerRef}
-                        {...coverflowDragHandlers}
-                    >
-                        <div className="coverflow-track">
-                            {portfolioItems.map((item) => (
-                                <div
-                                    key={item.id}
-                                    className={`coverflow-card ${portfolioItems.indexOf(item) === activeIndex ? 'active' : ''}`}
-                                    style={{
-                                        ...getCardStyle(portfolioItems.indexOf(item)),
-                                        '--card-gradient': item.gradient,
-                                    }}
-                                    onClick={() => setActiveIndex(portfolioItems.indexOf(item))}
-                                >
-                                    <div className="cf-card-bg">
-                                        <img src={item.image} alt={item.title} className="cf-card-image" loading="lazy" />
-                                        <div className="cf-card-overlay" style={{ background: item.gradient }}></div>
-                                    </div>
-                                    <div className="cf-card-content">
-                                        <span className="cf-category">{item.category}</span>
-                                        <h3 className="cf-title">{item.title}</h3>
-                                        <p className="cf-desc">{item.description}</p>
-                                        <div className="cf-result">
-                                            <span className="cf-result-label">성과</span>
-                                            <span className="cf-result-value">{item.result}</span>
-                                        </div>
-                                        <Link to={`/portfolio/${item.id}`} className="cf-detail-link">
-                                            자세히 보기 →
-                                        </Link>
-                                    </div>
-                                    <div className="cf-reflection"></div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Navigation Arrows */}
-                        <button className="cf-nav cf-nav-prev" onClick={handlePrev} aria-label="이전 슬라이드">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M15 18l-6-6 6-6" />
-                            </svg>
-                        </button>
-                        <button className="cf-nav cf-nav-next" onClick={handleNext} aria-label="다음 슬라이드">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M9 18l6-6-6-6" />
-                            </svg>
-                        </button>
-
-                        {/* Dots */}
-                        <div className="cf-dots">
-                            {portfolioItems.map((item, index) => (
-                                <button
-                                    key={item.id}
-                                    className={`cf-dot ${index === activeIndex ? 'active' : ''}`}
-                                    onClick={() => setActiveIndex(index)}
-                                    aria-label={`슬라이드 ${index + 1}`}
-                                />
-                            ))}
-                        </div>
-                    </div>
+                    <PortfolioSwiper
+                        items={portfolioItems}
+                        initialSlide={2}
+                        onSlideChange={handleSlideChange}
+                    />
 
                     {/* Detail Panel */}
                     <div className="coverflow-detail container">
                         <div className="detail-tags">
-                            {portfolioItems[activeIndex].tags.map((tag) => (
-                                <span key={tag} className="detail-tag">{tag}</span>
+                            {portfolioItems[activeIndex]?.tags.map((tag) => (
+                                <span key={tag} className="detail-tag">
+                                    {tag}
+                                </span>
                             ))}
                         </div>
                     </div>
@@ -168,14 +107,19 @@ export default function Portfolio() {
                                     <p className="portfolio-card-desc">{item.description}</p>
                                     <div className="portfolio-tags">
                                         {item.tags.map((tag) => (
-                                            <span key={tag} className="portfolio-tag">{tag}</span>
+                                            <span key={tag} className="portfolio-tag">
+                                                {tag}
+                                            </span>
                                         ))}
                                     </div>
                                     <div className="portfolio-result">
                                         <span className="result-label">성과</span>
                                         <span className="result-value">{item.result}</span>
                                     </div>
-                                    <Link to={`/portfolio/${item.id}`} className="portfolio-detail-link">
+                                    <Link
+                                        to={`/portfolio/${item.id}`}
+                                        className="portfolio-detail-link"
+                                    >
                                         자세히 보기 →
                                     </Link>
                                 </div>
@@ -193,14 +137,20 @@ export default function Portfolio() {
                         <h2 className="reviews-title">
                             수강생들의 <span className="gradient-text">진짜 이야기</span>
                         </h2>
-                        <p className="reviews-subtitle">실제 크몽 수강생분들의 생생한 후기를 확인하세요</p>
+                        <p className="reviews-subtitle">
+                            실제 크몽 수강생분들의 생생한 후기를 확인하세요
+                        </p>
                     </div>
 
                     <div className="reviews-grid">
                         <div className="review-card">
                             <div className="review-quote">"</div>
                             <div className="review-content">
-                                <p>완전히 만족했습니다! 스크립트 퀄리티는 말할 것도 없고, 금쪽같은 시간을 아껴주는 정교한 구성 덕분에 영상 제작 속도가 훨씬 빨라졌습니다.</p>
+                                <p>
+                                    완전히 만족했습니다! 스크립트 퀄리티는 말할 것도 없고, 금쪽같은
+                                    시간을 아껴주는 정교한 구성 덕분에 영상 제작 속도가 훨씬
+                                    빨라졌습니다.
+                                </p>
                             </div>
                             <div className="review-footer">
                                 <div className="review-rating">⭐⭐⭐⭐⭐</div>
@@ -212,7 +162,11 @@ export default function Portfolio() {
                         <div className="review-card featured">
                             <div className="review-quote">"</div>
                             <div className="review-content">
-                                <p>진짜 막막했던 GPTs 속 시원하게 다 알려주셨어요! 제가 원하는 GPTs 바로 만들 수 있게 도와주셨습니다. 설명도 쉽고 이해가 잘 되어서 따라가기 수월했어요!!</p>
+                                <p>
+                                    진짜 막막했던 GPTs 속 시원하게 다 알려주셨어요! 제가 원하는
+                                    GPTs 바로 만들 수 있게 도와주셨습니다. 설명도 쉽고 이해가 잘
+                                    되어서 따라가기 수월했어요!!
+                                </p>
                             </div>
                             <div className="review-footer">
                                 <div className="review-rating">⭐⭐⭐⭐⭐</div>
@@ -224,7 +178,10 @@ export default function Portfolio() {
                         <div className="review-card">
                             <div className="review-quote">"</div>
                             <div className="review-content">
-                                <p>후기 잘 안쓰는데 설명도 편하게 잘해주시고 친절하십니다. 진심 강추합니다!</p>
+                                <p>
+                                    후기 잘 안쓰는데 설명도 편하게 잘해주시고 친절하십니다. 진심
+                                    강추합니다!
+                                </p>
                             </div>
                             <div className="review-footer">
                                 <div className="review-rating">⭐⭐⭐⭐⭐</div>
@@ -236,7 +193,10 @@ export default function Portfolio() {
                         <div className="review-card">
                             <div className="review-quote">"</div>
                             <div className="review-content">
-                                <p>원고 만드는데 도움이 되었고, 정말 10분만에 원고 완성됩니다! 초보자분들도 이해하기 쉽게 엄청 친절하게 설명해주십니다.</p>
+                                <p>
+                                    원고 만드는데 도움이 되었고, 정말 10분만에 원고 완성됩니다!
+                                    초보자분들도 이해하기 쉽게 엄청 친절하게 설명해주십니다.
+                                </p>
                             </div>
                             <div className="review-footer">
                                 <div className="review-rating">⭐⭐⭐⭐⭐</div>
@@ -248,7 +208,10 @@ export default function Portfolio() {
                         <div className="review-card">
                             <div className="review-quote">"</div>
                             <div className="review-content">
-                                <p>자료의 퀄리티와 실무에 접목하는 사항 모두 만족합니다. 빠른 수익화를 원하신다면 무조건 추천드립니다!</p>
+                                <p>
+                                    자료의 퀄리티와 실무에 접목하는 사항 모두 만족합니다. 빠른
+                                    수익화를 원하신다면 무조건 추천드립니다!
+                                </p>
                             </div>
                             <div className="review-footer">
                                 <div className="review-rating">⭐⭐⭐⭐⭐</div>
@@ -260,7 +223,10 @@ export default function Portfolio() {
                         <div className="review-card">
                             <div className="review-quote">"</div>
                             <div className="review-content">
-                                <p>급하게 스케줄 요청드렸는데 빠르게 약속 잡아주시고 컨설팅 시간동안 최선을 다해서 알려주시려는 모습이 너무 좋았습니다.</p>
+                                <p>
+                                    급하게 스케줄 요청드렸는데 빠르게 약속 잡아주시고 컨설팅
+                                    시간동안 최선을 다해서 알려주시려는 모습이 너무 좋았습니다.
+                                </p>
                             </div>
                             <div className="review-footer">
                                 <div className="review-rating">⭐⭐⭐⭐⭐</div>
