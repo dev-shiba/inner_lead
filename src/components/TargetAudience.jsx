@@ -61,7 +61,7 @@ export default function TargetAudience() {
                             style={{ '--delay': `${index * 150}ms` }}
                         >
                             <div className="target-card-bg">
-                                <img src={target.image} alt={target.title} className="target-bg-img" />
+                                <img src={target.image} alt={target.title} className="target-bg-img" loading="lazy" />
                                 <div className="target-overlay"></div>
                             </div>
 

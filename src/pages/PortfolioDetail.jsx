@@ -368,7 +368,7 @@ export default function PortfolioDetail() {
                     <div className="detail-hero-grid">
                         {/* Left: Image */}
                         <div className="detail-image-wrapper">
-                            <img src={data.image} alt={data.title} className="detail-image" />
+                            <img src={data.image} alt={data.title} className="detail-image" loading="lazy" />
                         </div>
 
                         {/* Right: Info */}

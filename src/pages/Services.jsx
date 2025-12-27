@@ -86,7 +86,7 @@ export default function Services() {
                         {services.map((service, index) => (
                             <div key={service.id} className="service-saas-card">
                                 <div className="card-image-wrapper">
-                                    <img src={service.image} alt={service.title} className="card-image" />
+                                    <img src={service.image} alt={service.title} className="card-image" loading="lazy" />
                                     <div className="card-image-overlay"></div>
                                 </div>
 

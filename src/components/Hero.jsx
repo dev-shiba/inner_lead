@@ -1,14 +1,59 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import './Hero.css';
+
+// Memoized Star component to prevent unnecessary re-renders
+const Star = memo(function Star({ star, mousePos, containerSize }) {
+    const dx = mousePos.x - (star.x / 100) * containerSize.width;
+    const dy = mousePos.y - (star.y / 100) * containerSize.height;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const maxDistance = 150;
+    const scale = distance < maxDistance ? 1 + (1 - distance / maxDistance) * 1.5 : 1;
+    const brightness = distance < maxDistance ? 1 + (1 - distance / maxDistance) : 1;
+
+    return (
+        <div
+            className="star"
+            style={{
+                left: `${star.x}%`,
+                top: `${star.y}%`,
+                width: `${star.size}px`,
+                height: `${star.size}px`,
+                '--delay': `${star.delay}s`,
+                '--duration': `${star.duration}s`,
+                transform: `scale(${scale})`,
+                opacity: 0.3 * brightness,
+            }}
+        />
+    );
+});
+
+// Memoized StarField component
+const StarField = memo(function StarField({ stars, mousePos, containerSize }) {
+    return (
+        <div className="hero-stars">
+            {stars.map((star) => (
+                <Star
+                    key={star.id}
+                    star={star}
+                    mousePos={mousePos}
+                    containerSize={containerSize}
+                />
+            ))}
+        </div>
+    );
+});
 
 export default function Hero() {
     const [displayText, setDisplayText] = useState('');
     const [showCursor, setShowCursor] = useState(true);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
     const heroRef = useRef(null);
+    const rafRef = useRef(null);
+    const mousePosRef = useRef({ x: 0, y: 0 });
     const fullText = 'AI로 리드하는 당신의 미래';
 
-    // 별 파티클 생성
+    // Generate stars once
     const stars = useMemo(() => {
         return Array.from({ length: 50 }, (_, i) => ({
             id: i,
@@ -20,6 +65,22 @@ export default function Hero() {
         }));
     }, []);
 
+    // Update container size on mount and resize
+    useEffect(() => {
+        const updateSize = () => {
+            if (heroRef.current) {
+                setContainerSize({
+                    width: heroRef.current.offsetWidth,
+                    height: heroRef.current.offsetHeight,
+                });
+            }
+        };
+        updateSize();
+        window.addEventListener('resize', updateSize);
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
+
+    // Typing animation
     useEffect(() => {
         let currentIndex = 0;
         const typingInterval = setInterval(() => {
@@ -34,6 +95,7 @@ export default function Hero() {
         return () => clearInterval(typingInterval);
     }, []);
 
+    // Cursor blink
     useEffect(() => {
         const cursorInterval = setInterval(() => {
             setShowCursor(prev => !prev);
@@ -41,15 +103,32 @@ export default function Hero() {
         return () => clearInterval(cursorInterval);
     }, []);
 
-    // 마우스 움직임 추적
-    const handleMouseMove = (e) => {
+    // Throttled mouse move using requestAnimationFrame
+    const handleMouseMove = useCallback((e) => {
         if (!heroRef.current) return;
+
         const rect = heroRef.current.getBoundingClientRect();
-        setMousePos({
+        mousePosRef.current = {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top,
-        });
-    };
+        };
+
+        if (!rafRef.current) {
+            rafRef.current = requestAnimationFrame(() => {
+                setMousePos(mousePosRef.current);
+                rafRef.current = null;
+            });
+        }
+    }, []);
+
+    // Cleanup RAF on unmount
+    useEffect(() => {
+        return () => {
+            if (rafRef.current) {
+                cancelAnimationFrame(rafRef.current);
+            }
+        };
+    }, []);
 
     return (
         <section className="hero" ref={heroRef} onMouseMove={handleMouseMove}>
@@ -60,40 +139,18 @@ export default function Hero() {
                 <div className="hero-glow hero-glow-2"></div>
 
                 {/* Star Particles */}
-                <div className="hero-stars">
-                    {stars.map((star) => {
-                        const dx = mousePos.x - (star.x / 100) * (heroRef.current?.offsetWidth || 0);
-                        const dy = mousePos.y - (star.y / 100) * (heroRef.current?.offsetHeight || 0);
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        const maxDistance = 150;
-                        const scale = distance < maxDistance ? 1 + (1 - distance / maxDistance) * 1.5 : 1;
-                        const brightness = distance < maxDistance ? 1 + (1 - distance / maxDistance) : 1;
-
-                        return (
-                            <div
-                                key={star.id}
-                                className="star"
-                                style={{
-                                    left: `${star.x}%`,
-                                    top: `${star.y}%`,
-                                    width: `${star.size}px`,
-                                    height: `${star.size}px`,
-                                    '--delay': `${star.delay}s`,
-                                    '--duration': `${star.duration}s`,
-                                    transform: `scale(${scale})`,
-                                    opacity: 0.3 * brightness,
-                                }}
-                            />
-                        );
-                    })}
-                </div>
+                <StarField
+                    stars={stars}
+                    mousePos={mousePos}
+                    containerSize={containerSize}
+                />
             </div>
 
             <div className="hero-content container">
                 {/* Top: Badge */}
                 <div className="hero-top">
                     <div className="hero-badge animate-fade-in">
-                        <img src="/assets/images/hero-icon.png" alt="" className="badge-icon-img" />
+                        <img src="/assets/images/hero-icon.png" alt="" className="badge-icon-img" loading="lazy" />
                         <span>2025 생성형 AI 교육의 새로운 기준</span>
                     </div>
                 </div>
@@ -126,6 +183,7 @@ export default function Hero() {
                             src="/assets/innerlead_profile_v2.png"
                             alt="이너리드 프로필"
                             className="profile-image"
+                            loading="lazy"
                         />
                     </div>
                 </div>

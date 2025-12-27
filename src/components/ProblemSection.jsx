@@ -32,7 +32,7 @@ export default function ProblemSection() {
         <section className="problem-section" ref={ref}>
             <div className="problem-bg">
                 <div className="problem-bg-obj-wrapper">
-                    <img src="/assets/images/animated-sec-bg.png" alt="" className="problem-bg-obj" />
+                    <img src="/assets/images/animated-sec-bg.png" alt="" className="problem-bg-obj" loading="lazy" />
                 </div>
                 <div className="problem-overlay"></div>
             </div>
