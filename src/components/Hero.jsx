@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import './Hero.css';
+import profileImage from '../assets/innerlead_profile_v2-min.png';
 
 // Memoized Star component to prevent unnecessary re-renders
 const Star = memo(function Star({ star, mousePos, containerSize }) {
@@ -180,11 +181,11 @@ export default function Hero() {
                     {/* Right: Profile Image */}
                     <div className="hero-profile-wrap">
                         <img
-                            src="/assets/innerlead_profile_v2.png"
+                            src={profileImage}
                             alt="이너리드 프로필"
                             className="profile-image"
                             loading="eager"
-                            fetchPriority="high"
+                            fetchpriority="high"
                         />
                     </div>
                 </div>
