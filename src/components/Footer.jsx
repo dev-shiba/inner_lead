@@ -18,20 +18,20 @@ export default function Footer() {
                     <div className="footer-sns">
                         <h4 className="footer-section-title">SNS</h4>
                         <div className="sns-links">
-                            <a href="https://blog.naver.com/aibro/223302275291" target="_blank" rel="noopener noreferrer" className="sns-link">
-                                네이버 블로그
+                            <a href="https://blog.naver.com/aibro/223302275291" target="_blank" rel="noopener noreferrer" className="sns-link" aria-label="네이버 블로그">
+                                <img src="/assets/icon/icon-blog.svg" alt="네이버 블로그" className="sns-icon" />
                             </a>
-                            <a href="https://www.youtube.com/@innerlead?sub_confirmation=1" target="_blank" rel="noopener noreferrer" className="sns-link">
-                                YouTube
+                            <a href="https://www.youtube.com/@innerlead?sub_confirmation=1" target="_blank" rel="noopener noreferrer" className="sns-link" aria-label="YouTube">
+                                <img src="/assets/icon/icon-youtube.svg" alt="YouTube" className="sns-icon" />
                             </a>
-                            <a href="http://pf.kakao.com/_mHxldG/friend" target="_blank" rel="noopener noreferrer" className="sns-link">
-                                카카오톡 채널
+                            <a href="http://pf.kakao.com/_mHxldG/friend" target="_blank" rel="noopener noreferrer" className="sns-link" aria-label="카카오톡 채널">
+                                <img src="/assets/icon/icon-kakao.svg" alt="카카오톡" className="sns-icon" />
                             </a>
-                            <a href="https://cafe.naver.com/aibro" target="_blank" rel="noopener noreferrer" className="sns-link">
-                                네이버 카페
+                            <a href="https://cafe.naver.com/aibro" target="_blank" rel="noopener noreferrer" className="sns-link" aria-label="네이버 카페">
+                                <img src="/assets/icon/icon-cafe.svg" alt="네이버 카페" className="sns-icon" />
                             </a>
-                            <a href="https://www.threads.net/inner_lead" target="_blank" rel="noopener noreferrer" className="sns-link">
-                                Threads
+                            <a href="https://www.threads.net/inner_lead" target="_blank" rel="noopener noreferrer" className="sns-link" aria-label="Threads">
+                                <img src="/assets/icon/icon-threads.svg" alt="Threads" className="sns-icon" />
                             </a>
                         </div>
                     </div>

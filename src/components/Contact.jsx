@@ -7,25 +7,25 @@ export default function Contact() {
     const channels = [
         {
             name: '카카오톡 채널',
-            icon: '💬',
+            icon: '/assets/icon/icon-kakao.svg',
             url: 'http://pf.kakao.com/_mHxldG',
             color: '#FEE500',
         },
         {
             name: '네이버 블로그',
-            icon: '📝',
+            icon: '/assets/icon/icon-blog.svg',
             url: 'https://blog.naver.com/aibro',
             color: '#03C75A',
         },
         {
             name: '유튜브',
-            icon: '🎬',
+            icon: '/assets/icon/icon-youtube.svg',
             url: 'https://youtube.com/@innerlead',
             color: '#FF0000',
         },
         {
             name: 'Threads',
-            icon: '📝',
+            icon: '/assets/icon/icon-threads.svg',
             url: 'https://threads.net/@inner_lead',
             color: '#000000',
         },
@@ -76,7 +76,7 @@ export default function Contact() {
                                     className="channel-card"
                                     style={{ '--channel-color': channel.color }}
                                 >
-                                    <span className="channel-icon">{channel.icon}</span>
+                                    <img src={channel.icon} alt={channel.name} className="channel-icon" />
                                     <span className="channel-name">{channel.name}</span>
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
