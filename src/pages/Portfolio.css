@@ -696,7 +696,25 @@
     }
 
     .reviews-stats {
-        flex-direction: column;
+        flex-direction: row;
         gap: var(--space-4);
+        padding: var(--space-4) var(--space-3);
+    }
+
+    .stat-box {
+        padding: var(--space-1) var(--space-2);
+    }
+
+    .stat-box .stat-number {
+        font-size: var(--text-3xl);
+    }
+
+    .stat-box .stat-label {
+        font-size: var(--text-sm);
+        white-space: nowrap;
+    }
+
+    .stat-divider {
+        height: 30px;
     }
 }
