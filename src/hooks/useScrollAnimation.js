@@ -5,6 +5,20 @@ export function useScrollAnimation(threshold = 0.1) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
+        const currentRef = ref.current;
+        if (!currentRef) return;
+
+        // 마운트 시 즉시 체크: 이미 뷰포트 안에 있으면 바로 visible
+        const rect = currentRef.getBoundingClientRect();
+        const isAlreadyVisible =
+            rect.top < window.innerHeight && rect.bottom > 0;
+
+        if (isAlreadyVisible) {
+            setIsVisible(true);
+            return;
+        }
+
+        // 뷰포트 밖에 있으면 기존 로직 사용
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -15,15 +29,10 @@ export function useScrollAnimation(threshold = 0.1) {
             { threshold }
         );
 
-        const currentRef = ref.current;
-        if (currentRef) {
-            observer.observe(currentRef);
-        }
+        observer.observe(currentRef);
 
         return () => {
-            if (currentRef) {
-                observer.unobserve(currentRef);
-            }
+            observer.unobserve(currentRef);
         };
     }, [threshold]);
 

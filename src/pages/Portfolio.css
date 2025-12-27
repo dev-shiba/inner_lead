@@ -348,6 +348,23 @@
     transform: translateY(0);
 }
 
+/* Grid 전환 시 즉시 애니메이션 */
+.portfolio-card.animate-in {
+    animation: cardFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: var(--delay);
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .portfolio-card:hover {
     border-color: rgba(139, 92, 246, 0.3);
     transform: translateY(-2px);

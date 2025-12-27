@@ -259,13 +259,13 @@ export default function Portfolio() {
 
             {/* Grid View */}
             {viewMode === 'grid' && (
-                <section className="portfolio-grid-section" ref={ref}>
+                <section className="portfolio-grid-section">
                     <div className="container">
                         <div className="portfolio-grid">
                             {portfolioItems.map((item, index) => (
                                 <div
                                     key={index}
-                                    className={`portfolio-card ${isVisible ? 'visible' : ''}`}
+                                    className="portfolio-card animate-in"
                                     style={{ '--delay': `${index * 100}ms` }}
                                 >
                                     <span className="portfolio-category">{item.category}</span>
