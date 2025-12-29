@@ -9,7 +9,7 @@ export default function Services() {
             title: '컨설팅',
             subtitle: 'AI 전략 & 역량 강화',
             description: 'AI를 활용한 업무 효율화와 비즈니스 성장 전략',
-            image: '/assets/images/service_consulting.png',
+            image: '/assets/images/service_consulting.webp',
             features: [
                 '1:1 맞춤형 AI 활용 컨설팅',
                 '기업/개인 맞춤 역량 진단',
@@ -25,7 +25,7 @@ export default function Services() {
             title: '전자책',
             subtitle: '하루 10분 챗GPT 블로그 수익화',
             description: '블로그 초보자도 AI로 하루 10분 수익화',
-            image: '/assets/images/service_ebook.png',
+            image: '/assets/images/service_ebook.webp',
             features: [
                 '총 125페이지 실전 가이드',
                 'ChatGPT 활용 꿀팁 자료',
@@ -42,7 +42,7 @@ export default function Services() {
             title: '콘텐츠 제작',
             subtitle: 'AI 기반 이미지 & 영상 제작',
             description: 'AI를 활용한 고품질 콘텐츠 제작 대행',
-            image: '/assets/images/service_content.png',
+            image: '/assets/images/service_content.webp',
             features: [
                 'AI 이미지 생성 (미드저니)',
                 '영상 콘텐츠 제작 (숏폼)',

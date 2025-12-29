@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import './Hero.css';
-import profileImageWebP from '../assets/innerlead_profile_v2-optimized.webp';
+import profileImageWebP from '../assets/innerlead_profile_v2_high.webp';
 import profileImageJpg from '../assets/innerlead_profile_v2-optimized.jpg';
 
 // Memoized Star component to prevent unnecessary re-renders
@@ -152,7 +152,7 @@ export default function Hero() {
                 {/* Top: Badge */}
                 <div className="hero-top">
                     <div className="hero-badge animate-fade-in">
-                        <img src="/assets/images/hero-icon.png" alt="" className="badge-icon-img" loading="lazy" />
+                        <img src="/assets/images/hero-icon.webp" alt="" className="badge-icon-img" loading="lazy" />
                         <span>2025 생성형 AI 교육의 새로운 기준</span>
                     </div>
                 </div>

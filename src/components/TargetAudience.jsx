@@ -14,7 +14,7 @@ export default function TargetAudience() {
                 '직무 효율화로 야근 줄이기',
                 'AI로 실무 즉시 적용하기',
             ],
-            image: '/assets/images/target_office.png',
+            image: '/assets/images/target_office.webp',
         },
         {
             id: 'creator',
@@ -25,7 +25,7 @@ export default function TargetAudience() {
                 'AI 콘텐츠 자동화 시스템',
                 '작업 시간 1/5로 단축',
             ],
-            image: '/assets/images/target_creator.png',
+            image: '/assets/images/target_creator.webp',
         },
         {
             id: 'corporate',
@@ -36,7 +36,7 @@ export default function TargetAudience() {
                 '부서별 맞춤 생산성 향상',
                 '디지털 전환 컨설팅',
             ],
-            image: '/assets/images/target_corporate.png',
+            image: '/assets/images/target_corporate.webp',
         },
     ];
 
