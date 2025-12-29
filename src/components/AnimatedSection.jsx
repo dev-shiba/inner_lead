@@ -8,13 +8,13 @@ export default function AnimatedSection() {
     const yearsExp = useCountUp(17, 2000, isVisible);
     const students = useCountUp(28000, 2500, isVisible);
     const satisfaction = useCountUp(98, 2000, isVisible);
-    const companies = useCountUp(50, 2000, isVisible);
+    const companies = useCountUp(150, 2000, isVisible);
 
     const stats = [
         { value: yearsExp, suffix: '+', label: '년', subLabel: '실무 경력', icon: '⚡' },
         { value: students, suffix: '+', label: '명', subLabel: '수강생', icon: '👥' },
         { value: satisfaction, suffix: '%', label: '', subLabel: '만족도', icon: '⭐' },
-        { value: companies, suffix: '+', label: '개', subLabel: 'DB그룹', icon: '🏢' },
+        { value: companies, suffix: '회 이상', label: '', subLabel: '기업/기관', icon: '🏢' },
     ];
 
     return (

@@ -8,19 +8,19 @@ export default function ProblemSection() {
         {
             icon: '⚠️',
             title: 'AI 모르면 도태된다',
-            description: '2025년, AI를 활용하지 못하는 직장인은 점점 설 자리를 잃고 있습니다. 경쟁자는 이미 AI로 10배 생산성을 내고 있습니다.',
+            description: 'AI를 활용하지 못하는 직장인은 점점 설 자리를 잃고 있습니다. 경쟁자는 이미 AI로 10배 생산성을 내고 있습니다.',
             stat: '73%',
             statLabel: '기업이 AI 역량을 채용 기준으로 고려',
         },
         {
-            icon: '🔥',
+            icon: '🤔',
             title: '퇴사 후 막막한 미래',
             description: '퇴사를 꿈꾸지만, 무엇을 해야 할지 모르겠나요? 블로그, 유튜브 시작했지만 수익은 0원. AI 없이는 콘텐츠 생산조차 버겁습니다.',
             stat: '89%',
             statLabel: '퇴사 준비자가 수익화에 실패',
         },
         {
-            icon: '💀',
+            icon: '🏢',
             title: '경쟁사는 이미 AI 도입 완료',
             description: '당신의 회사만 아직도 수작업입니까? 경쟁사는 AI로 업무를 자동화하고, 당신 회사의 고객을 빼앗고 있습니다.',
             stat: '5배',
