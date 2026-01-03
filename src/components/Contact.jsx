@@ -58,7 +58,7 @@ export default function Contact() {
                                 </svg>
                                 1:1 상담 신청하기
                             </a>
-                            <a href="https://notion.so" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-lg">
+                            <a href="https://innerlead.notion.site/19381eb0765d8020aaa5f8ffa273d28d?pvs=105" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-lg">
                                 기업/기관 강의 의뢰서 작성
                             </a>
                         </div>
